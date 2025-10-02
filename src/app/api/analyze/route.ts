@@ -1,10 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { JOB_SCAM_DETECTION_PROMPT } from "@/lib/prompts";
-import { NextResponse, NextRequest } from "next/server";
-import { Readable } from "stream";
+import { NextResponse } from "next/server";
 
 const ai = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_GENAI_API_KEY,
+  apiKey: process.env.GOOGLE_AI_API_KEY,
 });
 
 interface ApiResponse {
@@ -13,44 +12,60 @@ interface ApiResponse {
   data: string | undefined;
 }
 
-export async function POST(req: Request, res: Response) {
-  const body = await req.json();
-  const textRequest = body.text
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const textRequest = body.text;
 
+    console.log("This is the input:", textRequest, typeof textRequest);
+    if (!textRequest) {
+      return NextResponse.json(
+        {
+          message: "[Text Request Error] No text detected.",
+        },
+        { status: 404 }
+      );
+    }
 
-  console.log("This is the input:", textRequest, typeof textRequest)
-  if (!textRequest) {
-    return { message: "[Text Request Error] No text detected." };
-  }
-
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: `
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: `
         Analyze the job post after the semicolon: ${textRequest}`,
-    config: {
-      systemInstruction: JOB_SCAM_DETECTION_PROMPT,
-    },
-  });
+      config: {
+        systemInstruction: JOB_SCAM_DETECTION_PROMPT,
+      },
+    });
 
-  const ai_response = response.text;
+    const ai_response = response.text;
 
-  if (!ai_response) {
-    return { message: "[Response Error] No response detected." };
+    if (!ai_response) {
+      return NextResponse.json(
+        { message: "[Response Error] No response detected." },
+        { status: 404 }
+      );
+    }
+
+    const clean_response = ai_response
+      ?.replace("```json", "")
+      .replace("```", "")
+      .trim();
+
+    const JSON_response = JSON.parse(clean_response);
+
+    console.log("This is the JSON Response:", JSON_response);
+
+    return NextResponse.json<ApiResponse>({
+      status: 200,
+      success: true,
+      data: JSON_response,
+    });
+  } catch (error) {
+    NextResponse.json(
+      {
+        success: false,
+        message: `Error: ${error}`,
+      },
+      { status: 500 }
+    );
   }
-
-  const clean_response = ai_response
-    ?.replace("```json", "")
-    .replace("```", "")
-    .trim();
-
-  const JSON_response = JSON.parse(clean_response);
-
-  console.log("This is the JSON Response:", JSON_response)
-
-
-  return NextResponse.json<ApiResponse>({
-    status: 200,
-    success: true,
-    data: JSON_response,
-  });
 }

@@ -6,29 +6,8 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import AlertIcon from "@/components/ui/alert";
 import { Button } from "./button";
 
-type AnalysisResultProps = {
-  data: {
-    data: {
-      risk_score: number;
-      risk_level: "Low" | "Medium" | "High";
-      summary: string;
-      detected_flags: {
-        flag_type: string;
-        description: string;
-        evidence: string;
-      }[];
-    };
-  };
-};
 
 type UseBoxProps = {
   openDialog: boolean;

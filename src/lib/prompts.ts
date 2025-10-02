@@ -16,7 +16,7 @@ Analyze the job post provided below and identify any red flags based on the comp
 
 5.  **SUSPICIOUS_CONTACT_METHODS (Metode kontak mencurigakan):** The primary way to apply is via personal messaging apps (WhatsApp, Telegram) or generic email addresses (@gmail.com) instead of a corporate domain.
 
-6.  **LACK_OF_COMPANY_IDENTITY (Identitas perusahaan tidak jelas):** The company name is not mentioned, is generic, cannot be easily verified, or no official website is provided. The interview location is a suspicious, non-office address.
+6.  **LACK_OF_COMPANY_IDENTITY (Identitas perusahaan tidak jelas):** The company name is not mentioned, is generic, cannot be easily verified, or no official website is provided. The interview location is a suspicious, non-office address. Check if company name is listed on Google, and check if there's any negative keyword associated with it in any Google searches. Check LinkedIn following or if possible, their website's visitors. If it shows a notable number, then it most likely be registered and trustworthy.
 
 7.  **PREMATURE_DATA_REQUEST (Permintaan data sensitif):** Asks for highly sensitive personal information (photo of KTP, KK, bank details) *before* a formal interview or job offer.
 
@@ -29,10 +29,6 @@ Analyze the job post provided below and identify any red flags based on the comp
 9.  **EXTREMELY_LOW_WAGE (Upah sangat rendah):**
     * **Below Minimum Wage:** The salary is below the regional minimum wage. For Jakarta positions in 2025, compare the offered salary to the official Jakarta minimum wage (UMP DKI Jakarta).
     * **Unpaid Internships:** Any form of unpaid internship should be flagged.
-
-10. **UNREGISTERED_COMPANY_NAME (nama perusahaan tidak terdaftar):**
-    * Check if company name is listed on Google, and check if there's any negative keyword associated with it in any Google searches.
-    * Check LinkedIn following or if possible, their website's visitors. If it shows a notable number, then it most likely be registered and trustworthy.
 
 
 ---

@@ -87,7 +87,7 @@ export default function AnalysisBox(
                           <AccordionContent>
                             <p className="mb-2">{flag.description}</p>
                             <p className="text-xs text-muted-foreground italic">
-                              <strong>Evidence:</strong> "{flag.evidence}"
+                              <strong>Evidence:</strong> &quot;{flag.evidence}&quot;
                             </p>
                           </AccordionContent>
                         </AccordionItem>

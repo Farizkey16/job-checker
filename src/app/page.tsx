@@ -1,26 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { instance } from "@/lib/axios";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
-import AlertIcon from "@/components/ui/alert";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogFooter,
-  DialogHeader,
-} from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Link from "next/link";
 import AnalysisBox from "@/components/ui/analysisdialog";
 import HowToUse from "@/components/ui/usedialog";
 
@@ -46,7 +29,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [analysisResult, setAnalysisResult] =
     useState<AnalysisResultType | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [isError, setIsError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUseOpen, setIsUseOpen] = useState(false)
 
@@ -59,13 +42,13 @@ export default function Home() {
 
   const checkResult = async () => {
     if (!jobText.trim()) {
-      setError("Please paste some job post details.");
+      setIsError("Please paste some job post details.");
       return;
     }
 
     setIsLoading(true);
     setAnalysisResult(null);
-    setError(null);
+    setIsError(null);
 
     try {
       const endpoint = `${BASE_URL}/api/analyze`;
@@ -78,7 +61,8 @@ export default function Home() {
       setAnalysisResult(response);
     } catch (error) {
       console.error("Analysis failed:", error);
-      setError("Sorry, something went wrong. Please retry.");
+      setIsError("Sorry, something went wrong. Please retry.");
+      console.log(isError)
     } finally {
       setIsLoading(false);
     }

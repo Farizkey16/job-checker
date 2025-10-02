@@ -6,6 +6,7 @@ import { instance } from "@/lib/axios";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import AnalysisBox from "@/components/ui/analysisdialog";
 import HowToUse from "@/components/ui/usedialog";
+import { headers } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -55,6 +56,9 @@ export default function Home() {
 
       const response: AnalysisResultType = await instance.post(endpoint, {
         text: jobText,
+        headers: {
+          "Authorization": `Bearer ${process.env.GOOGLE_AI_API_KEY}`
+        }
       });
 
       setIsModalOpen(true);

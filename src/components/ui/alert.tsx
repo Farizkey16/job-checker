@@ -19,7 +19,7 @@ export default function AlertIcon(prop: {score: number}) {
     );
   }
 
-  if (prop.score <= 50) {
+  if (prop.score <= 79) {
     result = (
       <div className="flex flex-col items-center gap-3 group">
         <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/20 transition-all duration-300 group-hover:scale-105">
@@ -35,7 +35,7 @@ export default function AlertIcon(prop: {score: number}) {
     );
   }
 
-  if (prop.score <= 100) {
+  if (prop.score >= 80) {
     result = (
       <div className="flex flex-col items-center gap-3 group">
         <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 transition-all duration-300 group-hover:scale-105">

@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { JOB_SCAM_DETECTION_PROMPT } from "@/lib/prompts";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GOOGLE_AI_API_KEY,
@@ -12,10 +12,10 @@ interface ApiResponse {
   data: string | undefined;
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const textRequest = body.text;
+    const textRequest = body.text as string;
 
     console.log("This is the input:", textRequest, typeof textRequest);
     if (!textRequest) {
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       data: JSON_response,
     });
   } catch (error) {
-    NextResponse.json(
+    return NextResponse.json(
       {
         success: false,
         message: `Error: ${error}`,

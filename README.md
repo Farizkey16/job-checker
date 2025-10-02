@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Apply Now: an AI-Powered Job Scam Detector**
 
-## Getting Started
+----
+**Problem Statement:**
 
-First, run the development server:
+There has been a lot of scams disguised as a job post. As an experienced Recruiter, it is easy for me to spot these fake job posts. However, not everyone might have the same trained eye as I do. Especially those who are desperate for job, and have limited resources in determining which job posts are real.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+So I want to help by creating this. Despite just a simple AI-wrapper, I believe this might help a lot of people in the future, and save so many people from being scammed while looking for job.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**About the app:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A web application designed to help jobseekers to avoid being scammed by a job post. Ensuring a safe applying experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This web application uses Gemini's Gemini AI, and enhanced to detect scam indicators such as:
 
-## Learn More
+1. Pre-interview payment request: asking for upfront cash or transfer for the entire application process,
+2. Unprofessional language: job descriptions that contain typos, grammatical errors, misplaced capitalizations, or excessive use of informal language,
+3. Improper scarcity: using phrases that creates a false sense of urgency,
+4. Unrealistic promises: suspiciously high salary for positions that usually have market standards,
+5. Suspicious contact methods: requesting to contact via non-formal line or using generic email such as @gmail or @yahoo instead of company's email,
+6. Vague company identity: company name cannot be found anywhere, no Google search results, no websites, nothing.
+7. Premature data request: asking for sensitive personal information way too early,
+8. Unrealistic expectations: mismatch in salary vs effort, unrealistic hours, unrelated tasks
+9. Extremely low wage: below minimum wage and unpaid internships
 
-To learn more about Next.js, take a look at the following resources:
+**Result shape:**
+1. Each result will have their own score, closer to 0 means it's risky, closer to 100 means it's safe
+2. There will be description made by Gemini, mentioning the scam indicators as well as the description and evidence
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Tech Stack & Architecture:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+_Frontend:_
+Next.js, React, Tailwind CSS, Shadcn/UI
 
-## Deploy on Vercel
+_Backend:_
+Next.js API Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+_Architecture:_
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. User submits a job post on the frontend text area,
+2. Frontend makes an API call to /api/analyze
+3. The route acts as a secure backend wrapper, it has already been equipped with detailed prompt and calls Google Gemini API
+4. Gemini analyzes the text from frontend, returns a structured JSON. The backend also clean the JSON from any whitespace or any other characters outside JSON
+5. The API route sends back the clean JSON for display in the frontend
+
+**FUTURE IMPROVEMENTS:**
+This v1 has so many limitations. But in the near future, improvements are in order and will focus on accuracy and cover more forms of job posts, not just text.
+
+**FEEDBACK:**
+I will always welcome a feedback, especially to help tons of people. You can send a feedback to my personal email farizky.priambudi@gmail.com
+

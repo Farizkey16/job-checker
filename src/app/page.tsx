@@ -51,7 +51,7 @@ export default function Home() {
     setIsError(null);
 
     try {
-      const endpoint = `${BASE_URL}/api/analyze`;
+      const endpoint = `/api/analyze`;
 
       const response: AnalysisResultType = await instance.post(endpoint, {
         text: jobText,

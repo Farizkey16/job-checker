@@ -15,9 +15,10 @@ interface ApiResponse {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const textRequest = body.text as string;
+    const textRequest = body.text;
 
     console.log("This is the input:", textRequest, typeof textRequest);
+    console.log("This is the body:", body)
     if (!textRequest) {
       return NextResponse.json(
         {
